@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Reviewer</title>
+    <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+<div id="dvHeader">
+        <table style="width: 100%">
+            <tr>
+                <td>
+                    <h1>Game Reviewer</h1>
+                </td>
+                <td>
+                    {% if usr %}
+                        <form action="/logout">
+                            <input id="btLogout" type="submit" value="Cerrar Sesión">
+                        </form>
+                    {% else %}
+                        No has iniciado sesión.
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

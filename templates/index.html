@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Reviewer</title>
+    <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+    {% include 'header.html'%}
+
+    <div id="dvFormLogin">
+        <form action="/login" method="post">
+                <label id= "lbEmail" for="edEmail">Correo: </label>
+                <input type="text" name="edEmail" id="edEmail" placeholder="Correo"/>
+                <br/>
+                <label id= "lbPassword" for="edPassword">Contraseña: </label>
+                <input type="password" name="edPassword" id="edPassword" placeholder="Contraseña"/>
+                <br/>
+                <input id="btLogin" type="submit" value="Iniciar Sesión">
+        </form>
+    </div>
+    <div id="dvFlash">
+        {% with messages = get_flashed_messages() %}
+           {% if messages %}
+              {% for message in messages %}
+                 {{ message }}
+              {% endfor %}
+           {% endif %}
+        {% endwith %}
+    </div>
+{% include 'footer.html' %}
+</body>
+</html>
