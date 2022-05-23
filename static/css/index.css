@@ -31,9 +31,24 @@ body {
     width: 100%;
     text-align: center;
     font-family:'Roboto',sans-serif;
+    height: 65px;
+}
+
+#dvContent{
+    padding-top: 65px;
 }
 
 #dvFormLogin{
+    width: 300px;
+    padding: 12px 20px;
+    margin: 8px auto;
+    display: table;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family:'Roboto',sans-serif;
+}
+
+#dvFormGame{
     width: 300px;
     padding: 12px 20px;
     margin: 8px auto;
@@ -66,7 +81,7 @@ body {
     font-family:'Roboto',sans-serif;
 }
 
-#btLogin:hover, #btPublish:hover, #btLogout:hover, #btReview:hover{
+#btLogin:hover, #btPublish:hover, #btLogout:hover, #btReview:hover, #btGame:hover, #btAddGame:hover, #btAddReview:hover, #btViewReviews:hover{
     background-color: #93f3cb;
 }
 
@@ -146,7 +161,7 @@ body {
     font-family:'Roboto',sans-serif;
 }
 
-#btLogout, #btLogin, #btPublish, #btReview{
+#btLogout, #btLogin, #btPublish, #btReview, #btGame, #btAddGame, #btAddReview, #btViewReviews{
     display:inline-block;
     padding:0.3em 1.2em;
     margin:0 0.1em 0.1em 0;
@@ -164,7 +179,7 @@ body {
     background-color: #04AA6D;
 }
 
-#btLogout, #btLogin, #btPublish, #btReview{
+#btLogout, #btLogin, #btPublish, #btReview, #btGame, #btAddGame, #btAddReview, #btViewReviews{
     margin: 10px auto auto;
     text-align: center;
     display: table;

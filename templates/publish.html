@@ -3,21 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Game Reviewer</title>
-    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
 </head>
 <body>
     {% include 'header.html'%}
 
         <div id="dvFormMessage">
         <form action="/save_message" method="post">
-            <label id= "lbName" for="edName">Nombre del juego: </label>
-            <input type="text" name="edName" id="edName" placeholder="Nombre"/>
+            <input type="hidden" name="edName" id="edName" value='{{ name }}'/>
             <br/>
-            <label id= "lbGender" for="edGender">Género: </label>
-            <input type="text" name="edGender" id="edGender" placeholder="Género"/>
+            <input type="hidden" name="edGender" id="edGender" value='{{ gender }}'/>
             <br/>
             <label id= "lbMessage" for="edMessage">Reseña: </label>
-            <input type="text" name="edMessage" id="edMessage" placeholder="Message..."/>
+            <input type name="edMessage" id="edMessage" placeholder="Review"/>
             <br/>
             <input id= "btPublish" type="submit" value="Publicar">
         </form>

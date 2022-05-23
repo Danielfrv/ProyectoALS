@@ -6,6 +6,7 @@ from flask_login import login_manager
 
 from model.gamedto import GameDto
 from model.userdto import UserDto
+from model.reviewdto import ReviewDto
 
 
 def create_app():
@@ -80,10 +81,26 @@ def login():
     return flask.redirect("/main")
 
 
+@app.route("/save_game", methods=["POST"])
+def save_game():
+    name_txt = flask.request.form.get("edName")
+    gender_txt = flask.request.form.get("edGender")
+
+    if not name_txt:
+        flask.flash("Introduce el nombre del juego.")
+        return flask.redirect("/create_game")
+
+    if not gender_txt:
+        flask.flash("Introduce el género del juego")
+        return flask.redirect("/create_game")
+
+    srp.save(GameDto(name_txt, gender_txt))
+    return flask.redirect("/main")
+
+
 @app.route("/save_message", methods=["POST"])
 def save_message():
     name_txt = flask.request.form.get("edName")
-    gender_txt = flask.request.form.get("edGender")
     message_txt = flask.request.form.get("edMessage")
     usr = UserDto.current_user()
 
@@ -91,29 +108,53 @@ def save_message():
         flask.flash("Introduce un mensaje.")
         return flask.redirect("/publish_review")
 
-    if not name_txt:
-        flask.flash("Introduce el nombre del juego.")
-        return flask.redirect("/publish_review")
-
-    if not gender_txt:
-        flask.flash("Introduce el género del juego")
-        return flask.redirect("/publish_review")
-
-    msg_oid = srp.save(GameDto(f"{usr.email} comentó: {message_txt}", name_txt, gender_txt))
+    msg_oid = srp.save(ReviewDto(name_txt, f"{usr.email} comentó: {message_txt}"))
     usr.add_message_oid(msg_oid)
 
     return flask.redirect("/main")
 
 
-@app.route("/publish_review")
-def publish_review():
+@app.route("/publish_review/<name>/<gender>", methods=["GET"])
+def publish_review(name, gender):
+    usr = UserDto.current_user()
+    name = name
+    gender = gender
+
+    sust = {
+        "usr": usr,
+        "name": name,
+        "gender": gender
+    }
+
+    return flask.render_template('publish.html', **sust)
+
+
+@app.route("/view_reviews/<name>/<gender>", methods=["GET"])
+def view_reviews(name, gender):
+    usr = UserDto.current_user()
+    name_txt = name
+    gender_txt = gender
+    messages_list = list(sirope.Sirope().filter(ReviewDto, lambda u: u.game == name_txt, 9))
+
+    sust = {
+        "usr": usr,
+        "name": name_txt,
+        "gender": gender_txt,
+        "messages_list": messages_list,
+    }
+
+    return flask.render_template('reviews.html', **sust)
+
+
+@app.route("/create_game")
+def create_game():
     usr = UserDto.current_user()
 
     sust = {
         "usr": usr,
     }
 
-    return flask.render_template('publish.html', **sust)
+    return flask.render_template('game.html', **sust)
 
 
 @app.route('/logout')

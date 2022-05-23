@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Reviewer</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+</head>
+<body>
+{% include 'header.html' %}
+    <div id="dvFormGame">
+        <form action="/save_game" method="post">
+                <label id= "lbName" for="edName">Nombre: </label>
+                <input type="text" name="edName" id="edName" placeholder="Nombre"/>
+                <br/>
+                <label id= "lbGender" for="edGender">Género: </label>
+                <input name="edGender" id="edGender" placeholder="Género"/>
+                <br/>
+                <input id="btAddGame" type="submit" value="Añadir Juego">
+        </form>
+    </div>
+    <div id="dvFlash">
+        {% with messages = get_flashed_messages() %}
+           {% if messages %}
+              {% for message in messages %}
+                 {{ message }}
+              {% endfor %}
+           {% endif %}
+        {% endwith %}
+    </div>
+{% include 'footer.html' %}
+</body>
+</html>

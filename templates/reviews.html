@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Reviewer</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+</head>
+<body style="vertical-align: top;">
+<div id="dvContent">
+<h1>{{ name }}</h1>
+<h3>{{ "Género: " + gender }}</h3>
+{% include 'header.html'%}
+<div id="dvMessagesList">
+{% if messages_list %}
+            {% for message in messages_list %}
+                <div id="dvMessages">
+                    <p id="txtMessages">
+                        {{ 'Review: ' + message.review }} <br>
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p><b>No hay reviews... ¡Sé el primero!</b></p>
+        {% endif %}
+</div>
+<form action="/publish_review/{{ name }}/{{ gender }}">
+    <input id="btPublish" type="submit" value="Añadir Review">
+</form>
+</div>
+{% include 'footer.html'%}
+</body>
+</html>

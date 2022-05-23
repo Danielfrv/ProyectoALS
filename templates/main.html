@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Game Reviewer</title>
-    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
 </head>
-<body>
+<body style="vertical-align: top;">
+<div id="dvContent">
 {% include 'header.html' %}
-<h2>Últimas Reviews.</h2>
+<h2>Juegos.</h2>
 <div id="dvMessagesList">
         {% if messages_list %}
             {% for message in messages_list %}
@@ -15,18 +16,20 @@
                     <p id="txtMessages">
                         {{ 'Nombre: ' + message.name }} <br>
                         {{ 'Género: ' + message.gender }} <br>
-                        {{ 'Reseña: ' + message.review }} <br>
-                        {{ 'Fecha de la reseña: ' + message.time }} <br>
+                        <form action="/view_reviews/{{ message.name }}/{{ message.gender }}" method="get">
+                                <input id="btViewReviews" type="submit" value="Ver Reviews">
+                        </form>
                     </p>
                 </div>
             {% endfor %}
         {% else %}
-            <p><b>No hay reviews... ¡Sé el primero!</b></p>
+            <p><b>No hay juegos... ¡Añade uno!</b></p>
         {% endif %}
 </div>
-<form action="/publish_review">
-    <input id="btReview" type="submit" value="Publicar Review">
+<form action="/create_game">
+    <input id="btGame" type="submit" value="Añadir Juego">
 </form>
+</div>
 {% include 'footer.html' %}
 </body>
 </html>
