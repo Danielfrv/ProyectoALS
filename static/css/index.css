@@ -4,6 +4,7 @@ body, html {
     margin: 0;
     padding: 0;
     display:table;
+    font-family:'Roboto',sans-serif;
 }
 body {
     display:table-cell;
@@ -133,6 +134,14 @@ body {
     font-family:'Roboto',sans-serif;
 }
 
+#edImage{
+    margin: auto auto;
+    border: 3px solid #f1f1f1;
+    width: 200px;
+    display: table;
+    font-family:'Roboto',sans-serif;
+}
+
 #lbName{
     width: 205px;
     margin: auto auto;
@@ -148,6 +157,13 @@ body {
 }
 
 #lbGender{
+    margin: auto;
+    width: 205px;
+    display: table;
+    font-family:'Roboto',sans-serif;
+}
+
+#lbImage{
     margin: auto;
     width: 205px;
     display: table;
@@ -186,6 +202,20 @@ body {
     font-size: 16px;
 }
 
+#btGame{
+    position: fixed;
+    right: 46%;
+    bottom: 0;
+    margin: auto auto 100px auto;
+}
+
+#btPublish{
+    position: fixed;
+    right: 46%;
+    bottom: 0;
+    margin: auto auto 100px auto;
+}
+
 #btLogout{
     background-color: #04573b;
 }
@@ -203,5 +233,13 @@ body {
 
 #txtMessages{
     margin: 10px;
+}
+
+#imgGame{
+    width: 300px;
+    height: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 

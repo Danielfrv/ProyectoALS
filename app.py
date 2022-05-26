@@ -1,9 +1,10 @@
 
+import os
 import flask
 import flask_login
 import sirope
 from flask_login import login_manager
-
+from flask import *
 from model.gamedto import GameDto
 from model.userdto import UserDto
 from model.reviewdto import ReviewDto
@@ -20,6 +21,7 @@ def create_app():
 
 
 app, lm, srp = create_app()
+app.config['UPLOAD_FOLDER'] = "static/images"
 
 
 @lm.user_loader
@@ -41,11 +43,11 @@ def get_index():
 @app.route('/main')
 def get_main():
     usr = UserDto.current_user()
-    messages_list = list(sirope.Sirope().load_last(GameDto, 9))
+    games_list = list(sirope.Sirope().load_last(GameDto, 6))
 
     sust = {
         "usr": usr,
-        "messages_list": messages_list,
+        "games_list": games_list,
     }
 
     return flask.render_template("main.html", **sust)
@@ -85,6 +87,10 @@ def login():
 def save_game():
     name_txt = flask.request.form.get("edName")
     gender_txt = flask.request.form.get("edGender")
+    image = request.files['edImage']
+    image_txt = image.filename
+    path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
+    image.save(path)
 
     if not name_txt:
         flask.flash("Introduce el nombre del juego.")
@@ -94,13 +100,18 @@ def save_game():
         flask.flash("Introduce el género del juego")
         return flask.redirect("/create_game")
 
-    srp.save(GameDto(name_txt, gender_txt))
+    if not image:
+        flask.flash("Introduce una imagen")
+        return flask.redirect("/create_game")
+
+    srp.save(GameDto(name_txt, gender_txt, image_txt))
     return flask.redirect("/main")
 
 
 @app.route("/save_message", methods=["POST"])
 def save_message():
     name_txt = flask.request.form.get("edName")
+    gender_txt = flask.request.form.get("edGender")
     message_txt = flask.request.form.get("edMessage")
     usr = UserDto.current_user()
 
@@ -108,10 +119,10 @@ def save_message():
         flask.flash("Introduce un mensaje.")
         return flask.redirect("/publish_review")
 
-    msg_oid = srp.save(ReviewDto(name_txt, f"{usr.email} comentó: {message_txt}"))
+    msg_oid = srp.save(ReviewDto(name_txt, f"{usr.email}: {message_txt}"))
     usr.add_message_oid(msg_oid)
 
-    return flask.redirect("/main")
+    return flask.redirect("/view_reviews/"+name_txt+"/"+gender_txt)
 
 
 @app.route("/publish_review/<name>/<gender>", methods=["GET"])

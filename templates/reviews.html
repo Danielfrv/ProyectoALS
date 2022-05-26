@@ -15,7 +15,8 @@
             {% for message in messages_list %}
                 <div id="dvMessages">
                     <p id="txtMessages">
-                        {{ 'Review: ' + message.review }} <br>
+                        {{ 'Fecha: ' + message.time }} <br>
+                        {{ message.review }}
                     </p>
                 </div>
             {% endfor %}

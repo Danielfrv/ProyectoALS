@@ -8,12 +8,15 @@
 <body>
 {% include 'header.html' %}
     <div id="dvFormGame">
-        <form action="/save_game" method="post">
+        <form action="/save_game" method="post" enctype="multipart/form-data">
                 <label id= "lbName" for="edName">Nombre: </label>
                 <input type="text" name="edName" id="edName" placeholder="Nombre"/>
                 <br/>
                 <label id= "lbGender" for="edGender">Género: </label>
                 <input name="edGender" id="edGender" placeholder="Género"/>
+                <br/>
+                <label id= "lbImage" for="edImage">Imagen: </label>
+                <input type="file" name="edImage" id="edImage"/>
                 <br/>
                 <input id="btAddGame" type="submit" value="Añadir Juego">
         </form>

@@ -10,13 +10,14 @@
 {% include 'header.html' %}
 <h2>Juegos.</h2>
 <div id="dvMessagesList">
-        {% if messages_list %}
-            {% for message in messages_list %}
+        {% if games_list %}
+            {% for game in games_list %}
                 <div id="dvMessages">
                     <p id="txtMessages">
-                        {{ 'Nombre: ' + message.name }} <br>
-                        {{ 'Género: ' + message.gender }} <br>
-                        <form action="/view_reviews/{{ message.name }}/{{ message.gender }}" method="get">
+                        <img src="static/images/{{ game.image }}" id="imgGame"> <br>
+                        {{ 'Nombre: ' + game.name }} <br>
+                        {{ 'Género: ' + game.gender }} <br>
+                        <form action="/view_reviews/{{ game.name }}/{{ game.gender }}" method="get">
                                 <input id="btViewReviews" type="submit" value="Ver Reviews">
                         </form>
                     </p>
