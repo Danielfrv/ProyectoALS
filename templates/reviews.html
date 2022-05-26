@@ -7,9 +7,30 @@
 </head>
 <body style="vertical-align: top;">
 <div id="dvContent">
-<h1>{{ name }}</h1>
-<h3>{{ "Género: " + gender }}</h3>
 {% include 'header.html'%}
+<table style="width: 100%">
+    <tr>
+        <td>
+            <h1>{{ name}}</h1>
+            <h3>{{ "Género: " + gender }}</h3>
+            {% for g in game %}
+                <div id="dvReview">
+                    <h4>{{ "Descripción: " + g.description }}</h4>
+                </div>
+            {% endfor %}
+        </td>
+        <td style="padding-right: 200px">
+            {% for g in game %}
+                <img src="../../static/images/{{ g.image }}" id="imgGameReview"> <br>
+            {% endfor %}
+        </td>
+        <td>
+            <form action="/publish_review/{{ name }}/{{ gender }}">
+                <input id="btPublish" type="submit" value="Añadir Review">
+            </form>
+        </td>
+    </tr>
+</table>
 <div id="dvMessagesList">
 {% if messages_list %}
             {% for message in messages_list %}
@@ -24,9 +45,7 @@
             <p><b>No hay reviews... ¡Sé el primero!</b></p>
         {% endif %}
 </div>
-<form action="/publish_review/{{ name }}/{{ gender }}">
-    <input id="btPublish" type="submit" value="Añadir Review">
-</form>
+
 </div>
 {% include 'footer.html'%}
 </body>

@@ -13,9 +13,11 @@
                     <h1>Game Reviewer</h1>
                 </td>
                 <td>
-                    <form action="/main">
-                            <input id="btLogout" type="submit" value="Juegos">
-                    </form>
+                    {% if usr %}
+                        <form action="/main">
+                                <input id="btLogout" type="submit" value="Juegos">
+                        </form>
+                    {% endif %}
                 </td>
                 <td>
                     {% if usr %}

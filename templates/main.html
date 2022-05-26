@@ -8,7 +8,18 @@
 <body style="vertical-align: top;">
 <div id="dvContent">
 {% include 'header.html' %}
-<h2>Juegos.</h2>
+<table style="width: 100%">
+    <tr>
+        <td style="padding-right: 200px">
+            <h2>Juegos.</h2>
+        </td>
+        <td>
+            <form action="/create_game">
+                <input id="btGame" type="submit" value="Añadir Juego">
+            </form>
+        </td>
+    </tr>
+</table>
 <div id="dvMessagesList">
         {% if games_list %}
             {% for game in games_list %}
@@ -27,9 +38,7 @@
             <p><b>No hay juegos... ¡Añade uno!</b></p>
         {% endif %}
 </div>
-<form action="/create_game">
-    <input id="btGame" type="submit" value="Añadir Juego">
-</form>
+
 </div>
 {% include 'footer.html' %}
 </body>

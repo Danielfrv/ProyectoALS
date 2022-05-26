@@ -43,7 +43,7 @@ def get_index():
 @app.route('/main')
 def get_main():
     usr = UserDto.current_user()
-    games_list = list(sirope.Sirope().load_last(GameDto, 6))
+    games_list = list(sirope.Sirope().load_last(GameDto, 18))
 
     sust = {
         "usr": usr,
@@ -87,10 +87,9 @@ def login():
 def save_game():
     name_txt = flask.request.form.get("edName")
     gender_txt = flask.request.form.get("edGender")
+    description_txt = flask.request.form.get("edDescription")
     image = request.files['edImage']
     image_txt = image.filename
-    path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
-    image.save(path)
 
     if not name_txt:
         flask.flash("Introduce el nombre del juego.")
@@ -103,8 +102,15 @@ def save_game():
     if not image:
         flask.flash("Introduce una imagen")
         return flask.redirect("/create_game")
+    else:
+        path = os.path.join(app.config['UPLOAD_FOLDER'], image.filename)
+        image.save(path)
 
-    srp.save(GameDto(name_txt, gender_txt, image_txt))
+    if not description_txt:
+        flask.flash("Introduce una descripcion")
+        return flask.redirect("/create_game")
+
+    srp.save(GameDto(name_txt, gender_txt, image_txt, description_txt))
     return flask.redirect("/main")
 
 
@@ -145,6 +151,7 @@ def view_reviews(name, gender):
     usr = UserDto.current_user()
     name_txt = name
     gender_txt = gender
+    game = list(sirope.Sirope().filter(GameDto, lambda u: u.name == name_txt, 1))
     messages_list = list(sirope.Sirope().filter(ReviewDto, lambda u: u.game == name_txt, 9))
 
     sust = {
@@ -152,6 +159,7 @@ def view_reviews(name, gender):
         "name": name_txt,
         "gender": gender_txt,
         "messages_list": messages_list,
+        "game": game,
     }
 
     return flask.render_template('reviews.html', **sust)

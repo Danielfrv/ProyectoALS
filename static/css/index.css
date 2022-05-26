@@ -1,7 +1,7 @@
 body, html {
     width: 100%;
     height: 100%;
-    margin: 0;
+    margin: 0 0 100px 0;
     padding: 0;
     display:table;
     font-family:'Roboto',sans-serif;
@@ -75,6 +75,14 @@ body {
 }
 
 #edPassword{
+    margin: auto auto;
+    border: 3px solid #f1f1f1;
+    width: 200px;
+    display: table;
+    font-family:'Roboto',sans-serif;
+}
+
+#edDescription{
     margin: auto auto;
     border: 3px solid #f1f1f1;
     width: 200px;
@@ -170,6 +178,13 @@ body {
     font-family:'Roboto',sans-serif;
 }
 
+#lbDescription{
+    margin: auto;
+    width: 205px;
+    display: table;
+    font-family:'Roboto',sans-serif;
+}
+
 #dvFlash{
     font-weight: bold;
     color: white;
@@ -202,18 +217,8 @@ body {
     font-size: 16px;
 }
 
-#btGame{
-    position: fixed;
-    right: 46%;
-    bottom: 0;
-    margin: auto auto 100px auto;
-}
-
-#btPublish{
-    position: fixed;
-    right: 46%;
-    bottom: 0;
-    margin: auto auto 100px auto;
+#btGame, #btPublish{
+    font-size: 20px;
 }
 
 #btLogout{
@@ -243,3 +248,15 @@ body {
     margin-right: auto;
 }
 
+#imgGameReview{
+    width: 500px;
+    height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#dvReview{
+    width: 400px;
+    word-wrap: break-word;
+}

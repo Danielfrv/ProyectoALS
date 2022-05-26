@@ -4,10 +4,11 @@ import PIL
 
 
 class GameDto:
-    def __init__(self, name, gender, image):
+    def __init__(self, name, gender, image, description):
         self._name = name
         self._gender = gender
         self._image = image
+        self._description = description
 
     @property
     def name(self):
@@ -20,6 +21,10 @@ class GameDto:
     @property
     def image(self):
         return self._image
+
+    @property
+    def description(self):
+        return self._description
 
     def __str__(self):
         return f"Nombre: \t{self._name}" \
