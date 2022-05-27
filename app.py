@@ -152,7 +152,7 @@ def view_reviews(name, gender):
     name_txt = name
     gender_txt = gender
     game = list(sirope.Sirope().filter(GameDto, lambda u: u.name == name_txt, 1))
-    messages_list = list(sirope.Sirope().filter(ReviewDto, lambda u: u.game == name_txt, 9))
+    messages_list = list(sirope.Sirope().filter(ReviewDto, lambda u: u.game == name_txt, 18))
 
     sust = {
         "usr": usr,

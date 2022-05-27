@@ -86,11 +86,15 @@ body {
     margin: auto auto;
     border: 3px solid #f1f1f1;
     width: 200px;
-    display: table;
+    display: block;
     font-family:'Roboto',sans-serif;
+    resize: none;
+    width: 200px;
+    height: 150px;
+    overflow-y: auto;
 }
 
-#btLogin:hover, #btPublish:hover, #btLogout:hover, #btReview:hover, #btGame:hover, #btAddGame:hover, #btAddReview:hover, #btViewReviews:hover{
+#btLogin:hover, #btPublish:hover, #btLogout:hover, #btReview:hover, #btGame:hover, #btAddGame:hover, #btAddReview:hover, #btViewReviews:hover, #btEditGame:hover{
     background-color: #93f3cb;
 }
 
@@ -130,8 +134,12 @@ body {
     margin: auto auto;
     border: 3px solid #f1f1f1;
     width: 200px;
-    display: table;
+    display: block;
     font-family:'Roboto',sans-serif;
+    resize: none;
+    width: 200px;
+    height: 150px;
+    overflow-y: auto;
 }
 
 #edGender{
